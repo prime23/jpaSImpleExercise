@@ -1,4 +1,4 @@
-package com.self.exercise.dao;
+package com.self.exercise.jpa;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

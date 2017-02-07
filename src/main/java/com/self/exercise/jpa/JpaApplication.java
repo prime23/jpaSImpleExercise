@@ -1,4 +1,4 @@
-package com.self.exercise.dao;
+package com.self.exercise.jpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

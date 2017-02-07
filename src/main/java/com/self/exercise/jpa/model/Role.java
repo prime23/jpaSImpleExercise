@@ -1,4 +1,4 @@
-package com.self.exercise.dao.model;
+package com.self.exercise.jpa.model;
 
 import javax.persistence.*;
 import java.util.Set;
