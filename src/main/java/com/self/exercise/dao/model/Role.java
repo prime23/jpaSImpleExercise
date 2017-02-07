@@ -15,10 +15,14 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> user;
+    private Set<User> users;
 
     public Role() {
         // JPA empty constructor
+    }
+
+    public Role(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -37,12 +41,12 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUser() {
-        return user;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUser(Set<User> user) {
-        this.user = user;
+    public void setUsers(Set<User> user) {
+        this.users = user;
     }
 
     @Override
@@ -54,14 +58,14 @@ public class Role {
 
         if (id != null ? !id.equals(role.id) : role.id != null) return false;
         if (name != null ? !name.equals(role.name) : role.name != null) return false;
-        return user != null ? user.equals(role.user) : role.user == null;
+        return users != null ? users.equals(role.users) : role.users == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (users != null ? users.hashCode() : 0);
         return result;
     }
 
@@ -70,7 +74,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", user=" + user +
+                ", users=" + users +
                 '}';
     }
 }

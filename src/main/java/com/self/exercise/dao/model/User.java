@@ -1,6 +1,8 @@
 package com.self.exercise.dao.model;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -23,6 +25,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
+
+    public User() {
+        // JPA use
+    }
+
+    public User(String userName, String email, Role role, Role... roles){
+        this.userName = userName;
+        this.email = email;
+        this.roles = new HashSet<>();
+        this.roles.add(role);
+        Arrays.stream(roles).forEach(this.roles::add);
+    }
 
     public Long getId() {
         return id;
@@ -62,5 +76,37 @@ public class User {
 
     public boolean removeRole(Role role) {
         return roles.remove(role);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return roles != null ? roles.equals(user.roles) : user.roles == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }
