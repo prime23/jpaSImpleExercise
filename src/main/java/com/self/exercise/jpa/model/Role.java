@@ -1,6 +1,7 @@
 package com.self.exercise.jpa.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,9 +20,11 @@ public class Role {
 
     public Role() {
         // JPA empty constructor
+        users = new HashSet<>();
     }
 
     public Role(String name) {
+        this();
         this.name = name;
     }
 
@@ -48,6 +51,8 @@ public class Role {
     public void setUsers(Set<User> user) {
         this.users = user;
     }
+
+    public void addUser(User user) {this.users.add(user);}
 
     @Override
     public boolean equals(Object o) {
