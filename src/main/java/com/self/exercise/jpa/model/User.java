@@ -3,6 +3,7 @@ package com.self.exercise.jpa.model;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,6 +27,9 @@ public class User {
     )
     private Set<Role> roles;
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<Entry> entries;
+
     public User() {
         // JPA use
     }
@@ -37,6 +41,16 @@ public class User {
         this.roles.add(role);
         Arrays.stream(roles).forEach(this.roles::add);
     }
+
+    public List<Entry> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(List<Entry> entries) {
+        this.entries = entries;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -88,7 +102,8 @@ public class User {
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        return roles != null ? roles.equals(user.roles) : user.roles == null;
+        if (roles != null ? !roles.equals(user.roles) : user.roles != null) return false;
+        return entries != null ? entries.equals(user.entries) : user.entries == null;
     }
 
     @Override
@@ -97,6 +112,7 @@ public class User {
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        result = 31 * result + (entries != null ? entries.hashCode() : 0);
         return result;
     }
 
@@ -107,6 +123,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", roles=" + roles +
+                ", entries=" + entries +
                 '}';
     }
 }
