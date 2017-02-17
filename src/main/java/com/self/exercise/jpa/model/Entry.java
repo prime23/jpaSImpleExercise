@@ -10,7 +10,7 @@ public class Entry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private String title;
     private String body;
     private long entered;
@@ -28,11 +28,11 @@ public class Entry {
         this.user = user;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

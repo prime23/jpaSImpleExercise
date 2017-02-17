@@ -19,7 +19,7 @@ public class User {
     private String userName;
     private String email;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "roles_to_users",
             joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"),
