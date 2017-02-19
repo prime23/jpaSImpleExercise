@@ -1,7 +1,11 @@
 package com.self.exercise.jpa.dao;
 
+import com.google.common.collect.Iterables;
 import com.self.exercise.jpa.model.Role;
 import com.self.exercise.jpa.model.User;
+
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,22 +51,28 @@ public class UserDaoTest {
     @Transactional
     public void getAllUsersTest() {
         Iterable<User> users = userDao.findAll();
-        for(User u : users) {
+        for (User u : users) {
             log.info("{}", u);
         }
+        int size = Iterables.size(users);
+        assertEquals("Size should be 2", 2, size);
     }
 
     @Test
     @Transactional
     public void getUsersByRoles() {
         List<User> users = userDao.findAllByRoles(adminRole);
-        for(User u : users) {
+        for (User u : users) {
             log.info("Admin: {}", u);
         }
+        int size = Iterables.size(users);
+        assertEquals("There should only be one admin", 1, size);
         users = userDao.findAllByRoles(userRole);
-        for(User u : users) {
+        for (User u : users) {
             log.info("User: {}", u);
         }
+        size = Iterables.size(users);
+        assertEquals("There should be two users", 2, size);
     }
 
     @Test
