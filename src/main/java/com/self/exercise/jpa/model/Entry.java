@@ -14,17 +14,18 @@ public class Entry {
     private String title;
     private String body;
     private long entered;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private User user;
 
     public Entry() {
         // JPA use
     }
 
-    public Entry(String title, String body, long entered, User user) {
+    public Entry(String title, String body, User user) {
         this.title = title;
         this.body = body;
-        this.entered = entered;
+        this.entered = System.currentTimeMillis();
         this.user = user;
     }
 

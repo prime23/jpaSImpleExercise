@@ -1,10 +1,7 @@
 package com.self.exercise.jpa.model;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by prime23 on 2/5/17.
@@ -27,7 +24,7 @@ public class User {
     )
     private Set<Role> roles;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<Entry> entries;
 
     public User() {
@@ -50,7 +47,12 @@ public class User {
         this.entries = entries;
     }
 
-
+    public void addEnty(Entry entry) {
+        if(entries == null) {
+            entries = new ArrayList<>();
+        }
+        entries.add(entry);
+    }
 
     public Long getId() {
         return id;
@@ -91,6 +93,8 @@ public class User {
     public boolean removeRole(Role role) {
         return roles.remove(role);
     }
+
+
 
     @Override
     public boolean equals(Object o) {
